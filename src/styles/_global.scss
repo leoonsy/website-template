@@ -1,0 +1,38 @@
+// Базовые стили
+html, body {
+  overflow-x: hidden;
+  min-width: 240px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/** Общее **/
+body {
+  min-width: 240px;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+}
+
+.wrapper {
+  overflow: hidden;
+  min-width: 240px;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button,
+button:active,
+button:focus,
+input:active,
+input:focus { 
+  outline: none;
+}
