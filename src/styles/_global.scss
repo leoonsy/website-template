@@ -1,4 +1,6 @@
 // Базовые стили
+@import "_variables.scss";
+
 html, body {
   overflow-x: hidden;
   min-width: 240px;
@@ -12,7 +14,6 @@ html, body {
 /** Общее **/
 body {
   min-width: 240px;
-  font-family: Roboto, sans-serif;
   font-weight: 400;
 }
 
