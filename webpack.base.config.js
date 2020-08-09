@@ -12,7 +12,7 @@ const baseConfig = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: [/\/node_modules\//, /.min/],
+                exclude: [/\/node_modules\//],
                 loader: 'babel-loader'
             },
         ]
