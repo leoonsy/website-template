@@ -1,0 +1,30 @@
+// Базовые стили
+@import "variables";
+
+html,
+body {
+  overflow-x: hidden;
+  min-width: 240px;
+  font-weight: 400;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button,
+button:active,
+button:focus,
+input:active,
+input:focus {
+  outline: none;
+}

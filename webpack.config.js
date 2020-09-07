@@ -1,5 +1,5 @@
 //конфигурация webpack
-const path = require('path')
+const path = require('path');
 require('dotenv').config();
 const config = process.env.CONFIG || 'main';
 const mode = process.env.MODE || 'development';

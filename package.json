@@ -16,10 +16,15 @@
     "@babel/plugin-proposal-private-methods": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "autoprefixer": "^9.8.0",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.26.7",
     "css-loader": "^3.5.3",
     "dotenv": "^8.2.0",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^7.0.0-beta.3",
     "file-loader": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.0",
@@ -39,19 +44,25 @@
     "imagemin-jpeg-recompress": "^7.0.0",
     "imagemin-pngquant": "^8.0.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "2.1.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.1.0",
     "url-loader": "^4.1.0",
     "vargs": "^0.1.0",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12",
     "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.1.3"
   },
   "scripts": {
     "clean": "gulp clean",
     "wp:build": "webpack",
     "wp:watch": "webpack --watch",
-    "wp:server": "webpack-dev-server --inline --hot",
+    "wp:server": "webpack-dev-server --inline",
     "gulp:build": "gulp build",
     "gulp:watch": "gulp build-watch",
     "gulp:server": "gulp"
@@ -59,6 +70,7 @@
   "dependencies": {
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "vue": "^2.6.12"
   }
 }

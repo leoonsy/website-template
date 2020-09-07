@@ -1,39 +1,12 @@
-// Базовые стили
-@import "_variables.scss";
+// Глобальные стили
+@import "variables";
 
-html, body {
-  overflow-x: hidden;
-  min-width: 240px;
+.btn-reset {
+  border: none;
+  background: transparent;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-/** Общее **/
+html,
 body {
-  min-width: 240px;
-  font-weight: 400;
-}
-
-.wrapper {
-  overflow: hidden;
-  min-width: 240px;
-}
-
-a {
-  color: inherit;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-button,
-button:active,
-button:focus,
-input:active,
-input:focus { 
-  outline: none;
+  height: 100%;
 }
