@@ -8,12 +8,9 @@ const gulp = require('gulp'), // подключаем Gulp
   sass = require('gulp-sass'), // модуль для компиляции SASS (SCSS) в CSS
   autoprefixer = require('gulp-autoprefixer'), // модуль для автоматической установки автопрефиксов
   cleanCSS = require('gulp-clean-css'), // плагин для минимизации CSS
-  uglify = require('gulp-uglify'), // модуль для минимизации JavaScript
   cache = require('gulp-cache'), // модуль для кэширования
   rimraf = require('gulp-rimraf'), // плагин для удаления файлов и каталогов,
-  babel = require('gulp-babel'), //перевод с новых стандартов js в старые для кроссбраузерности
   htmlmin = require('gulp-htmlmin'), //минификация html
-  args = require('yargs').argv, //работа с аргументами
   rename = require('gulp-rename'), //переименование
   gulpif = require('gulp-if'), //проверка условий
   imagemin = require('gulp-imagemin'), //сжатие изображений
@@ -43,13 +40,10 @@ const buildFolders = {
   back: 'www/',
 };
 
-const jsFilesSrc = [srcFolders[config] + '**/test.js'];
-
 /* пути к исходным файлам (src) и тем, за изменениями которых нужно наблюдать (watch) */
 const path = {
   src: {
     html: srcFolders[config] + '**/[^_]*.+(html|tpl)',
-    js: jsFilesSrc,
     sass: srcFolders[config] + '**/[^_]*.+(sass|scss)',
     img: srcFolders[config] + '**/[^_]*.+(jpg|jpeg|png|svg|gif)',
     other:
@@ -59,7 +53,6 @@ const path = {
   },
   watch: {
     html: srcFolders[config] + '**/*.+(html|tpl)',
-    js: jsFilesSrc,
     sass: srcFolders[config] + '**/*.+(sass|scss)',
     img: srcFolders[config] + '**/*.(jpg|jpeg|png|svg|gif)',
     other:
@@ -67,11 +60,6 @@ const path = {
       '**/*.!(html|js|ts|sass|scss|css|jpg|jpeg|png|svg|gif|tpl|vue)',
     dots: srcFolders[config] + '**/.*', //не получилось в watch запихать dots файлы и через |, гребаный node-glob
   },
-};
-
-//является ли файл минифицированым
-const isNotMinifiedFile = (file) => {
-  return !/.*\.min\.js/.test(file.history[0]);
 };
 
 // сбор html
@@ -110,34 +98,6 @@ const sassBuild = () => {
     .pipe(gulpif(isProd, cleanCSS())) // минимизируем CSS
     .pipe(gulpif(isDev, sourcemaps.write('./'))) // записываем sourcemap
     .pipe(gulp.dest(buildFolders[config])); // выгружаем в dist
-};
-
-// сбор js
-const jsBuild = () => {
-  return gulp
-    .src(path.src.js) // получим файлы js
-    .pipe(gulpif(isNotMinifiedFile, rename({ suffix: '.min' })))
-    .pipe(plumber()) // для отслеживания ошибок
-    .pipe(rigger()) // импортируем все указанные файлы js
-    .pipe(gulpif(isDev, sourcemaps.init())) //инициализируем sourcemap
-    .pipe(
-      gulpif(
-        isNotMinifiedFile,
-        babel({
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                modules: false,
-              },
-            ],
-          ],
-        })
-      )
-    )
-    .pipe(gulpif(isProd, uglify())) // минимизируем js
-    .pipe(gulpif(isDev, sourcemaps.write('./'))) //  записываем sourcemap
-    .pipe(gulp.dest(buildFolders[config])); // готовый файл
 };
 
 // сбор img
@@ -184,7 +144,6 @@ const clean = () => {
 // сборка всего
 const build = gulp.parallel(
   sassBuild,
-  jsBuild,
   htmlBuild,
   imgBuild,
   otherBuild,
@@ -212,7 +171,6 @@ const serve = async () => {
 // слежение за изменениями
 const watch = () => {
   gulp.watch(path.watch.sass, sassBuild);
-  gulp.watch(path.watch.js, jsBuild);
   gulp.watch(path.watch.html, htmlBuild);
   gulp.watch(path.watch.img, imgBuild);
   gulp.watch(path.watch.other, otherBuild);
@@ -230,7 +188,6 @@ const cleanTaskGenerator = (key) => () =>
 
 exports['html:build'] = htmlBuild;
 exports['sass:build'] = sassBuild;
-exports['js:build'] = jsBuild;
 exports['img:build'] = imgBuild;
 exports['other:build'] = otherBuild;
 exports['dots:build'] = dotsBuild;

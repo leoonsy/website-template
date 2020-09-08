@@ -12,7 +12,7 @@ const isProd = !isDev;
 const mainConfig = merge(baseConfig, {
   context: path.resolve(__dirname, 'src'),
   entry: {
-    main: './scripts/main.js',
+    main: './scripts/main.ts',
   },
   output: {
     filename: 'scripts/[name].min.js',

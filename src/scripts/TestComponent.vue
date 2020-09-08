@@ -5,11 +5,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'TestComponent',
-  data: () => ({
-    text: 'Simple component',
-  }),
-};
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component
+export default class TestComponent extends Vue {
+  text = 'Simple component';
+}
 </script>
