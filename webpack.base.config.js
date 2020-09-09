@@ -1,13 +1,12 @@
 //общая конфигурация webpack
 const path = require('path');
-const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 require('dotenv').config();
 
-const mode = process.env.MODE || 'development';
+const mode = process.env.NODE_ENV || 'development';
 const isDev = mode === 'development';
 const isProd = !isDev;
 

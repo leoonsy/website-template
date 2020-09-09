@@ -21,7 +21,7 @@ const gulp = require('gulp'), // подключаем Gulp
 require('dotenv').config();
 
 /* параметры скрипта */
-const mode = process.env.MODE || 'development';
+const mode = process.env.NODE_ENV || 'development';
 const config = process.env.CONFIG || 'main';
 const minimizeImg = process.env.GULP_MINIMIZE_IMG || true;
 const isDev = mode === 'development';
