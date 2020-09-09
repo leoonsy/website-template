@@ -48,7 +48,7 @@ const path = {
     img: srcFolders[config] + '**/[^_]*.+(jpg|jpeg|png|svg|gif)',
     other:
       srcFolders[config] +
-      '**/[^_]*.!(html|js|sass|scss|css|jpg|jpeg|png|svg|gif|tpl)',
+      '**/[^_]*.!(html|js|ts|sass|scss|css|jpg|jpeg|png|svg|gif|tpl|vue)',
     dots: srcFolders[config] + '**/.*', //не получилось в watch запихать dots файлы и через |, гребаный node-glob
   },
   watch: {

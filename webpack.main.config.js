@@ -10,9 +10,8 @@ const isProd = !isDev;
 
 //главная конфигурация для верстки и т.д. (без взаимодействия с сервером)
 const mainConfig = merge(baseConfig, {
-  context: path.resolve(__dirname, 'src'),
   entry: {
-    main: './scripts/main.ts',
+    main: './src/scripts/main.js',
   },
   output: {
     filename: 'scripts/[name].min.js',

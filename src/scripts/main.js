@@ -2,7 +2,9 @@ import Test from './Test';
 import Vue from 'vue';
 import TestComponent from './TestComponent.vue';
 
-Test();
+// Test();
+console.log(Vue);
+debugger;
 
 new Vue({
   el: '.wrapper',

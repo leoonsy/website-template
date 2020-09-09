@@ -4,15 +4,28 @@ const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 require('dotenv').config();
 
 const mode = process.env.MODE || 'development';
 const isDev = mode === 'development';
 const isProd = !isDev;
-const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
 const plugins = () => {
-  const config = [new VueLoaderPlugin()];
+  const config = [
+    new VueLoaderPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+        extensions: {
+          vue: true,
+        },
+      },
+    }),
+  ];
 
   if (isProd) {
     config.push(new BundleAnalyzerPlugin());
@@ -27,11 +40,9 @@ const optimization = () => {
       chunks: 'all',
     },
   };
-
   if (isProd) {
     config.minimizer = [new TerserWebpackPlugin()];
   }
-
   return config;
 };
 
@@ -42,7 +53,7 @@ const babelOptions = (preset) => {
         '@babel/preset-env',
         {
           useBuiltIns: 'usage',
-          debug: false,
+          debug: true,
           corejs: '3.6.5',
         },
       ],
@@ -82,12 +93,12 @@ const baseConfig = {
     rules: [
       {
         test: /\.js$/,
-        exclude: [/\/node_modules\//],
+        exclude: /node_modules/,
         use: jsLoaders(),
       },
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
+        exclude: [/\/node_modules\//],
         loader: {
           loader: 'babel-loader',
           options: babelOptions([
